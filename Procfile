@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar target/graphaware-neo4j-discourse-0.0.1-SNAPSHOT.jar -Dserver.port=$PORT $JAR_OPTS
