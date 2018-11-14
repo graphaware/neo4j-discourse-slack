@@ -6,4 +6,5 @@ Application that sends notifications about a new post on https://community.neo4j
 
 * `slack.webhook.url` : The slack incoming webhook url
 * `slack.webhook.displayName` : The name used for displaying messages in the channel
+* `forum.filter.categories` : A comma separated list of categories or tags to filter on, eg : "Announcements,cypher" : default is *
 
