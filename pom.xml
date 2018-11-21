@@ -25,6 +25,7 @@
 		<camel.version>2.22.1</camel.version>
 		<slack.version>0.0.9</slack.version>
 		<jsoup.version>1.11.3</jsoup.version>
+		<neo4j-driver.version>1.7.0</neo4j-driver.version>
 	</properties>
 
 	<dependencies>
@@ -67,6 +68,12 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.neo4j.driver</groupId>
+			<artifactId>neo4j-java-driver</artifactId>
+			<version>${neo4j-driver.version}</version>
 		</dependency>
 
 

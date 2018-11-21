@@ -33,7 +33,7 @@ public class RssItemProcessor implements Processor {
 
     private ForumPost transform(SyndEntry syndEntry) {
         String url = syndEntry.getLink();
-        return new ForumPost(url, syndEntry.getTitle(), getDescriptionText(syndEntry), syndEntry.getAuthor(), mapCategories(syndEntry), getTags(url));
+        return new ForumPost(url, syndEntry.getTitle(), getDescriptionText(syndEntry), syndEntry.getAuthor(), mapCategories(syndEntry), getTags(url), syndEntry.getPublishedDate());
     }
 
     private List<String> mapCategories(SyndEntry syndEntry) {

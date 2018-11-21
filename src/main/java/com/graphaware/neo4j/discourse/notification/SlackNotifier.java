@@ -8,8 +8,6 @@ import org.apache.camel.Processor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class SlackNotifier implements Processor {
 
@@ -39,6 +37,4 @@ public class SlackNotifier implements Processor {
                 .text(text.substring(0, Math.min(255, text.length())) + " ...")
                 .footer(categories);
     }
-
-
 }
