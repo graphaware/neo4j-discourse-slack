@@ -41,7 +41,7 @@ public class RssRoute extends RouteBuilder {
                     @Override
                     public void process(Exchange exchange) throws Exception {
                         ForumPost forumPost = exchange.getIn().getBody(ForumPost.class);
-                        String tweet = forumPost.getTitle() + " " + forumPost.getUrl() + "#neo4j";
+                        String tweet = "New #Neo4j question : " + forumPost.getTitle() + " " + forumPost.getUrl();
                         exchange.getOut().setBody(tweet);
                     }
                 })
