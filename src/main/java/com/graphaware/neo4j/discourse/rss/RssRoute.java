@@ -31,9 +31,9 @@ public class RssRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-//        from("rss:https://community.neo4j.com/latest.rss")
+        from("rss:https://community.neo4j.com/latest.rss")
 //        from("rss:https://community.neo4j.com/c/community-content-blogs.rss")
-        from("rss:https://community.neo4j.com/c/projects-collaboration.rss")
+//        from("rss:https://community.neo4j.com/c/projects-collaboration.rss")
                 .process(rssItemProcessor)
                 .filter().method(forumPostFilter, "filter")
                 .process(neo4jPersister)
