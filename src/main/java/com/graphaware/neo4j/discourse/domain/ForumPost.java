@@ -22,6 +22,8 @@ public class ForumPost {
 
     private final Date publishedDate;
 
+    private Feed feed;
+
     public ForumPost(String url, String title, String description, String author, List<String> categories, List<String> tags, Date date) {
         this.url = url;
         this.title = title;
@@ -77,5 +79,13 @@ public class ForumPost {
 
     public String getAuthorId() {
         return Arrays.asList(author.split(" ")).get(0);
+    }
+
+    public Feed getFeed() {
+        return feed;
+    }
+
+    public void setFeed(Feed feed) {
+        this.feed = feed;
     }
 }

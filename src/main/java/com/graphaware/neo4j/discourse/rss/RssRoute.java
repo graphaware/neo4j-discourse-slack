@@ -31,20 +31,24 @@ public class RssRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("rss:https://community.neo4j.com/latest.rss")
+//        from("rss:https://community.neo4j.com/latest.rss")
+//        from("rss:https://community.neo4j.com/c/community-content-blogs.rss")
+        from("rss:https://community.neo4j.com/c/projects-collaboration.rss")
                 .process(rssItemProcessor)
-                .filter().method(alreadyProcessedFilter, "filter")
                 .filter().method(forumPostFilter, "filter")
                 .process(neo4jPersister)
-                .process(slackNotifier)
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws Exception {
-                        ForumPost forumPost = exchange.getIn().getBody(ForumPost.class);
-                        String tweet = "New #Neo4j question : " + forumPost.getTitle() + " " + forumPost.getUrl();
-                        exchange.getOut().setBody(tweet);
-                    }
-                })
-                .to("twitter://timeline/user?consumerKey={{twitter.consumer.key}}&consumerSecret={{twitter.consumer.key.secret}}&accessToken={{twitter.access.token}}&accessTokenSecret={{twitter.access.token.secret}}");
+                .filter(method(alreadyProcessedFilter, "filter"))
+                .to("log:com.graphaware.neo4j");
+//                .process(slackNotifier)
+//                .process(new Processor() {
+//                    @Override
+//                    public void process(Exchange exchange) throws Exception {
+//                        ForumPost forumPost = exchange.getIn().getBody(ForumPost.class);
+//                        String tweet = "New #Neo4j question : " + forumPost.getTitle() + " " + forumPost.getUrl();
+//                        exchange.getOut().setBody(tweet);
+//                    }
+//                })
+//                .to("twitter://timeline/user?consumerKey={{twitter.consumer.key}}&consumerSecret={{twitter.consumer.key.secret}}&accessToken={{twitter.access.token}}&accessTokenSecret={{twitter.access.token.secret}}");
+//
     }
 }

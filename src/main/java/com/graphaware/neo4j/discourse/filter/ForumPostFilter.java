@@ -40,5 +40,4 @@ public class ForumPostFilter {
                     forumPost.getCategories().contains(s) || forumPost.getTags().contains(s)
                 );
     }
-
 }

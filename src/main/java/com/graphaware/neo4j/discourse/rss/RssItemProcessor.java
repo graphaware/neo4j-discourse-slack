@@ -26,14 +26,17 @@ public class RssItemProcessor implements Processor {
         System.out.println("starting processing...");
         SyndFeedImpl feed = exchange.getIn().getBody(SyndFeedImpl.class);
         SyndEntry syndEntry = (SyndEntry) feed.getEntries().get(0);
-
-        exchange.getOut().setBody(transform(syndEntry));
+        ForumPost forumPost = transform(syndEntry);
+        exchange.getOut().setBody(forumPost);
 
     }
 
     private ForumPost transform(SyndEntry syndEntry) {
         String url = syndEntry.getLink();
-        return new ForumPost(url, syndEntry.getTitle(), getDescriptionText(syndEntry), syndEntry.getAuthor(), mapCategories(syndEntry), getTags(url), syndEntry.getPublishedDate());
+        ForumPost forumPost = new ForumPost(url, syndEntry.getTitle(), getDescriptionText(syndEntry), syndEntry.getAuthor(), mapCategories(syndEntry), getTags(url), syndEntry.getPublishedDate());
+        forumPost.setFeed(getFeed(url));
+
+        return forumPost;
     }
 
     private List<String> mapCategories(SyndEntry syndEntry) {
@@ -56,6 +59,16 @@ public class RssItemProcessor implements Processor {
             e.printStackTrace();
 
             return new ArrayList<>();
+        }
+    }
+
+    private Feed getFeed(String url) {
+        try {
+            return MAPPER.readValue(new URL(url + ".json"), Feed.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return null;
         }
     }
 

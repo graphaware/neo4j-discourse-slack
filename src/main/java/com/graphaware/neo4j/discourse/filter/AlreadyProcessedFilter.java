@@ -19,10 +19,11 @@ public class AlreadyProcessedFilter {
     }
 
     public boolean filter(ForumPost forumPost) {
-        String query = "MATCH (n:ForumPost) WHERE n.id = $id RETURN n";
+        String query = "MATCH (n:ForumPost) WHERE n.uid = $uid RETURN n";
 
         try (Session session = driver.session()) {
-            return !session.run(query, Collections.singletonMap("id", forumPost.getUrl())).hasNext();
+            String uid = forumPost.getFeed().getPostStream().getPosts().get(0).getTopicId() + "__" + forumPost.getFeed().getPostStream().getPosts().get(0).getId();
+            return !session.run(query, Collections.singletonMap("uid", uid)).hasNext();
         }
     }
 }

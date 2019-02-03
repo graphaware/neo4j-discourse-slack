@@ -17,7 +17,7 @@ public class Neo4jSchema {
 
     public void assertSchema() {
         try (Session session = driver.session()) {
-            session.run("CREATE CONSTRAINT ON (n:ForumPost) ASSERT n.id IS UNIQUE").consume();
+            session.run("CREATE CONSTRAINT ON (n:ForumPost) ASSERT n.uid IS UNIQUE").consume();
             session.run("CREATE CONSTRAINT ON (n:User) ASSERT n.id IS UNIQUE").consume();
             session.run("CREATE CONSTRAINT ON (n:Tag) ASSERT n.name IS UNIQUE").consume();
             session.run("CREATE CONSTRAINT ON (n:Category) ASSERT n.name IS UNIQUE").consume();
