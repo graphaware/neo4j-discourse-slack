@@ -34,8 +34,8 @@ public class RssRoute extends RouteBuilder {
         from("rss:https://community.neo4j.com/latest.rss")
                 .process(rssItemProcessor)
                 .filter().method(forumPostFilter, "filter")
-                .process(neo4jPersister)
                 .filter(method(alreadyProcessedFilter, "filter"))
+                .process(neo4jPersister)
                 .process(slackNotifier)
                 .process(new Processor() {
                     @Override
