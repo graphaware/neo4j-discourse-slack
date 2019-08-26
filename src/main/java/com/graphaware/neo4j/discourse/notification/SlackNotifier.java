@@ -25,6 +25,7 @@ public class SlackNotifier implements Processor {
     }
 
     public void notifyNewPost(ForumPost forumPost) throws Exception {
+        System.out.println("notifying on Slack..");
         new Slack(webhookUrl)
                 .displayName(displayName)
                 .push(buildSlackMessage(forumPost.getUrl(), forumPost.getTitle(), forumPost.getAuthor(), forumPost.getDescription(), forumPost.joinedTagsAndCategories()));
